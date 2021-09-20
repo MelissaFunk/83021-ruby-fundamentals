@@ -1,3 +1,5 @@
+PIZZAS = []
+
 def init
   puts "Welcome to the lean, mean Pizza Machine App!"
   puts "Tell us your name: "
@@ -20,19 +22,45 @@ def menu_options
 end 
 
 def menu_selection
-  # Need to add some control flow based on users menu selection
+  selection = gets.strip
+  while selection != "exit"
+    if selection == "1"
+      pizza = create_pizza
+      PIZZAS << pizza
+    elsif selection == "2"
+      pizza_list
+    else
+      puts "I'm not sure what you mean. Try again: "
+    end
+    menu_options
+    selection = gets.strip
+  end
 end 
 
 def create_pizza
-  puts "Name of pizza, get creative!:"
+  puts "Name of pizza, get creative!: "
   name = gets.strip
   puts "List your toppings: "
   toppings = gets.strip
   puts "Describe this pizza: "
   desc = gets.strip 
 
-  # need to return a pizza hash
+  pizza = {
+    name: name,
+    toppings: toppings,
+    desc: desc
+  }
 end 
+
+def pizza_list
+  PIZZAS.each do |pizza|
+  puts ""
+  puts "Name: #{pizza[:name]}"
+  puts "Toppings: #{pizza[:toppings]}"
+  puts "Description: #{pizza[:desc]}"
+  puts ""
+  end
+end
 
 # Currently there is not a method to print the list of created pizzas. In order to complete this:
 # 1. Think about a way to store and save the pizzas a user creates
